@@ -1,0 +1,26 @@
+<section id=carrier_detail>
+<div>
+  <h2>Transportadora - <%= @carrier.brand_name %></h2>
+  <dl>
+    <dt>Razão Social:</dt>
+    <dd><%= @carrier.corporate_name %></dd>
+    <dt>Domínio:</dt>
+    <dd><%= @carrier.domain_name %></dd>
+    <dt>Situação cadastral:</dt>
+    <dd><%= @carrier.active_state ? 'Ativa' : 'Inativa'%></dd>
+    <dt>CNPJ:</dt>
+    <dd><%= @carrier.registration_number %></dd>
+    <dt>Endereço:</dt>
+    <dd><%= @carrier.address %></dd>
+    <dt>Cidade:</dt>
+    <dd><%= @carrier.city %></dd>
+    <dt>Estado:</dt>
+    <dd><%= @carrier.state %></dd>  
+  </dl>
+  <hr>
+</div>
+<div>
+  <%= link_to 'Home', root_path  %> 
+</div>
+
+</section>

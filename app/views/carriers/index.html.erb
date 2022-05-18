@@ -1,0 +1,27 @@
+<section id="carriers">
+  <h1>Lista de Transportadoras</h1>
+
+<% if @carriers.any? %>
+  <table>
+    <thead>
+    <tr>
+      <th>Nome:</th>
+      <th>Localização:</th>
+    </tr>      
+    </thead>
+    <tbody>
+      <% @carriers.each do |c| %>
+      <tr>
+        <td><%= link_to c.brand_name, c %>
+        <td><%= c.city %> - <%= c.state %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% else %>
+    <p> Não existem transportadoras cadastradas </p>
+  <% end %>
+
+  <hr>
+  <%= link_to 'Home', root_path %> | <%= link_to 'Cadastrar Transportadora', new_carrier_path %>
+</section>

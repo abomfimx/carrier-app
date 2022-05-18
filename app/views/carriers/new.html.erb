@@ -1,0 +1,56 @@
+<section id=carrier_new>
+<h1>Nova Transportadora</h1>
+  <% if(@carrier.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @carrier.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with(model: @carrier) do |c| %>
+  <div>
+    <%= c.label :brand_name %>
+    <%= c.text_field :brand_name %>
+  </div>
+  <div>
+    <%= c.label :corporate_name %>
+    <%= c.text_field :corporate_name %>
+  </div>
+  <div>
+    <%= c.label :domain_name %>
+    <%= c.text_field :domain_name %>
+  </div>
+  <div>
+    <%= c.label :active_state, 'Transportadora Ativa' %>
+    <%= c.check_box :active_state %>
+  </div>
+  <div>
+    <%= c.label :registration_number %>
+    <%= c.text_field :registration_number %>
+  </div>
+  <div>
+    <%= c.label :address %>
+    <%= c.text_field :address %>
+  </div>
+  <div>
+    <%= c.label :city %>
+    <%= c.text_field :city %>
+  </div>
+  <div>
+    <%= c.label :state %>
+    <%= c.text_field :state %>
+  </div>
+  <div>
+    <%= c.submit %>
+  </div>
+
+  <% end %>
+  <hr>
+  <div>
+    <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', carriers_path %>
+  </div>
+
+
+</section>
