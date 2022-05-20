@@ -1,0 +1,39 @@
+<%= form_with(model: @carrier_price) do |c| %>
+  <div>
+    <%= c.label :band_name %>
+    <%= c.text_field :band_name %>
+  </div>
+  <div>
+    <%= c.label :min_volume %>
+    <%= c.number_field :min_volume %>
+  </div>
+  <div>
+    <%= c.label :max_volume %>
+    <%= c.number_field :max_volume %>
+  </div>
+  <div>
+    <%= c.label :min_weight %>
+    <%= c.number_field :min_weight %>
+  </div>
+  <div>
+    <%= c.label :max_weight %>
+    <%= c.number_field :max_weight %>
+  </div>
+    <div>
+    <%= c.label :price %>
+    <%= c.number_field :price %>
+  </div>
+  <div>
+    <%= c.label :carrier_id %>
+    <%= c.collection_select :carrier_id, @carriers, :id, :brand_name%>
+  </div>
+  <div>
+    <%= c.submit 'Salvar' %>
+  </div>
+
+  <% end %>
+  <hr>
+  <div>
+    <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', carrier_prices_path %>
+  </div>
+

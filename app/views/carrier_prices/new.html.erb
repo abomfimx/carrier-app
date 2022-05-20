@@ -1,0 +1,12 @@
+<section id=carrier_price_new>
+<h1>Nova Tabela de Preço</h1>
+    <% if(@carrier_price.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @carrier_price.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
+<%= render 'form_carrier_price' %>

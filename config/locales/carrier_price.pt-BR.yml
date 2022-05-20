@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      carrier_price: "Tabela de Preço"
+    attributes:
+      carrier_price:
+        band_name: "Tabela"
+        min_volume: "Volume mínimo"
+        max_volume: "Volume máximo"
+        min_weight: "Peso mínimo"
+        max_weight: "Peso máximo"
+        price: "Preço"
+        carrier_id: "Transportadora"
