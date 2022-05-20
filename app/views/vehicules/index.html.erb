@@ -1,0 +1,31 @@
+<section id=vehicules>
+<h1>Lista de Veículos</h1>
+
+<% if @vehicules.any? %>
+  <table>
+    <thead>
+    <tr>
+      <th>Marca:</th>
+      <th>Modelo:</th>
+      <th>Carga Máxima:</th>
+    </tr>  
+    </thead>
+    <tbody>
+      <% @vehicules.each do |v| %>
+        <tr>
+          <td><%= link_to v.brand_name, v %></td>
+          <td><%= v.vehicle_model %></td>
+          <td><%= v.max_load %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else  %>
+  <p>Nenhum veículo cadastrado</p>
+<% end %>
+<hr>
+<div>
+  <%= link_to 'Home', root_path %> | <%= link_to 'Cadastrar Veículos', new_vehicule_path %>
+</div>
+
+</section>

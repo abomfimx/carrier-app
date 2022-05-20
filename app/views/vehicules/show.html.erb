@@ -1,0 +1,23 @@
+<section id=vehicule_detail>
+<div>
+  <h2>Veículo - <%= @vehicule.brand_name %></h2>
+</div>
+<div>
+  <dl>
+    <dt>Modelo:</dt>
+    <dd><%= @vehicule.vehicle_model %></dd>
+    <dt>Placa:</dt>
+    <dd><%= @vehicule.plate_number %></dd>
+    <dt>Ano:</dt>
+    <dd><%= @vehicule.year %></dd>
+    <dt>Carga Máxima:</dt>
+    <dd><%= @vehicule.max_load %></dd>
+    <dt>Transportadora:</dt>
+    <dd><%= @vehicule.carrier.brand_name %></dd>
+  </dl>
+  <hr>
+</div>
+<div>
+  <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', vehicules_path %>
+</div>
+</section>
