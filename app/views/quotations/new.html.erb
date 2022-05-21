@@ -1,0 +1,60 @@
+<section id=quotation_new>
+<h1>Novo Orçamento</h1>
+  <% if(@quotation.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @quotation.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with(model: @quotation) do |q| %>
+  <div>
+    <%= q.label :quotation_date %>
+    <%= q.date_field :quotation_date %>
+  </div>
+  <div>
+    <%= q.label :delivery_date %>
+    <%= q.date_field :delivery_date %>
+  </div>
+  <div>
+    <%= q.label :weight %>(g)
+    <%= q.number_field :weight %>
+  </div>
+  <div>
+    <%= q.label :height %>(cm)
+    <%= q.number_field :height %>
+  </div>
+    <div>
+    <%= q.label :width %>(cm)
+    <%= q.number_field :width %>
+  </div>
+  <div>
+    <%= q.label :depth %>(cm)
+    <%= q.number_field :depth %>
+  </div>
+    <div>
+    <%= q.label :distance %>(km)
+    <%= q.number_field :distance %>
+  </div>
+    <div>
+    <%= q.label :shipping_price %>
+    <%= q.number_field :shipping_price %>
+  </div>
+  <div>
+    <%= q.label :carrier_id %>
+    <%= q.collection_select :carrier_id, @carriers, :id, :brand_name%>
+  </div>
+  <div>
+    <%= q.submit 'Salvar' %>
+  </div>
+
+  <% end %>
+  <hr>
+  <div>
+    <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', quotations_path %>
+  </div>
+
+
+</section>

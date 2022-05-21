@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      quotation: "Orçamento"
+    attributes:
+      quotation:
+        quotation_date: "Data do Orçamento"
+        delivery_date: "Previsão de Entrega"
+        weight: "Peso"
+        height: "Altura"
+        width: "Largura"
+        depth: "Profundidade"
+        distance: "Distância"
+        shipping_price: "Preço"
+        carrier_id: "Transportadora"
