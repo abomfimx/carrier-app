@@ -1,0 +1,35 @@
+<section id=customers_list>
+  <h1>Lista de Clientes</h1>
+  <% if @customers.any? %>
+    <table>
+        <thead>
+        <tr>
+          <th>Nome:</th>
+          <th>Endereço:</th>
+          <th>Cidade:</th>
+          <th>Estado:</th>
+          <th>CPF:</th>
+          <th>E-mail:</th>
+        </tr>  
+        </thead>
+        <tbody>
+          <% @customers.each do |c| %>
+            <tr>
+              <td><%= c.name%></td>
+              <td><%= c.address %></td>
+              <td><%= c.city %></td>
+              <td><%= c.state %></td>
+              <td><%= c.cpf %></td>
+              <td><%= c.email %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else  %>
+      <p>Nenhum Cliente cadastrado</p>
+  <% end %>
+  <hr>
+  <div>
+    <%= link_to 'Home', root_path %> | <%= link_to 'Cadastrar Cliente', new_customer_path %>
+  </div>
+</section>

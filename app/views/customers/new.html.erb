@@ -1,0 +1,46 @@
+<section id=customer_new>
+<h1>Novo Cliente</h1>
+  <% if(@customer.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+        <ul>
+      <% @customer.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+
+  <% end %>
+  <%= form_with(model: @customer) do |c| %>
+  <div>
+    <%= c.label :name %>
+    <%= c.text_field :name %>
+  </div>
+  <div>
+    <%= c.label :address %>
+    <%= c.text_field :address %>
+  </div>
+  <div>
+    <%= c.label :city %>
+    <%= c.text_field :city %>
+  </div>
+  <div>
+    <%= c.label :state %>
+    <%= c.text_field :state %>
+  </div>
+  <div>
+    <%= c.label :cpf %>
+    <%= c.text_field :cpf %>
+  </div>
+  <div>
+    <%= c.label :email %>
+    <%= c.text_field :email %>
+  </div>
+  <div>
+    <%= c.submit 'Salvar' %>
+  </div>
+
+  <% end %>
+  <hr>
+  <div>
+    <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', customers_path %>
+  </div>
+</section>

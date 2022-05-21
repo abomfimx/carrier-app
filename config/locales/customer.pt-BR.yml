@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      customer: "Cliente"
+    attributes:
+      customer:
+        name: "Nome"
+        address: "Endereço"
+        city: "Cidade"
+        state: "Estado"
+        cpf: "CPF"
+        email: "E-mail"

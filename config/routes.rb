@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :carrier_prices, only: [:index, :new, :create, :edit, :update]
   resources :delivery_periods, only: [:index, :new, :create]
   resources :quotations, only: [:index, :create, :new]
+  resources :customers, only: [:index, :new, :create]
 end
