@@ -1,0 +1,45 @@
+<section id=product_new>
+  <h1>Cadastrar Novo Produto</h1>
+
+  <% if(@product.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+
+  <%= form_with(model: @product) do |p| %>
+    <div>
+      <%= p.label :product_name %>
+      <%= p.text_field :product_name %>
+    </div>
+    <div>
+      <%= p.label :weight %>(g)
+      <%= p.number_field :weight %>
+    </div>
+    <div>
+      <%= p.label :height %>(cm)
+      <%= p.number_field :height %>
+    </div>
+    <div>
+      <%= p.label :width %>(cm)
+      <%= p.number_field :width %>
+    </div>
+    <div>
+      <%= p.label :depth %>
+      <%= p.number_field :depth %>
+    </div>
+    <div>
+      <%= p.label :sku %>
+      <%= p.text_field :sku %>
+    </div>
+    <%= p.submit 'Salvar' %>
+  <% end %>
+    <hr>
+  <div>
+    <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', products_path %>
+  </div>
+</section>

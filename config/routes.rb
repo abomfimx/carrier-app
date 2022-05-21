@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :delivery_periods, only: [:index, :new, :create]
   resources :quotations, only: [:index, :create, :new]
   resources :customers, only: [:index, :new, :create]
+  resources :products, only: [:index, :new, :create]
 end

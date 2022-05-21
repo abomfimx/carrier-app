@@ -1,0 +1,36 @@
+<section id=products_list>
+<h1>Lista de Produtos</h1>
+<% if @products.any? %>
+  <table>
+      <thead>
+      <tr>
+        <th>Nome:</th>
+        <th>Peso:</th>
+        <th>Altura:</th>
+        <th>Largura:</th>
+        <th>Profundidade:</th>
+        <th>Código do Produto:</th>
+      </tr>  
+      </thead>
+      <tbody>
+        <% @products.each do |p| %>
+          <tr>
+            <td><%= p.product_name%></td>
+            <td><%= p.weight %></td>
+            <td><%= p.height %></td>
+            <td><%= p.width %></td>
+            <td><%= p.depth %></td>
+            <td><%= p.sku%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else  %>
+    <p>Nenhum Produto cadastrado</p>
+<% end %>
+<hr>
+<div>
+  <%= link_to 'Home', root_path %>  | <%= link_to 'Cadastrar Produto', new_product_path %>
+</div>
+
+</section>
