@@ -1,0 +1,33 @@
+<section id=delivery_periods_list>
+<h1>Lista de Prazos</h1>
+<% if @delivery_periods.any? %>
+  <table>
+      <thead>
+      <tr>
+        <th>Tabela:</th>
+        <th>Distancia mínima:</th>
+        <th>Distancia máxima:</th>
+        <th>Days:</th>
+        <th>Transportadora:</th>
+      </tr>  
+      </thead>
+      <tbody>
+        <% @delivery_periods.each do |d| %>
+          <tr>
+            <td><%= d.band_name%></td>
+            <td><%= d.min_distance %></td>
+            <td><%= d.max_distance %></td>
+            <td><%= d.days %></td>
+            <td><%= d.carrier.brand_name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else  %>
+    <p>Nenhum Prazo cadastrado</p>
+<% end %>
+<hr>
+<div>
+  <%= link_to 'Home', root_path %> | <%= link_to 'Cadastrar Prazo', new_delivery_period_path %>
+</div>
+</section>

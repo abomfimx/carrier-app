@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuário visita a tela de Cadastro de Preços' do
-  it 'e vê header Lista de Prazo e Preços' do
+  it 'e vê header Lista de Preços' do
     # Arrange
     # Act
     visit root_path
@@ -33,7 +33,7 @@ describe 'Usuário visita a tela de Cadastro de Preços' do
     expect(page).to have_content('10000')
     expect(page).to have_content('7')
     expect(page).to have_content('XPTO Trans')
-  
+ 
   end
 
   it 'não existem Preços cadastrados' do

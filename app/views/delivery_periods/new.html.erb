@@ -1,0 +1,46 @@
+<section id=delivery_period_new>
+<h1>Nova Tabela de Prazos</h1>
+  <% if(@delivery_period.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @delivery_period.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with(model: @delivery_period) do |d| %>
+  <div>
+    <%= d.label :band_name %>
+    <%= d.text_field :band_name %>
+  </div>
+  <div>
+    <%= d.label :min_distance %>
+    <%= d.number_field :min_distance %>
+  </div>
+  <div>
+    <%= d.label :max_distance %>
+    <%= d.number_field :max_distance %>
+  </div>
+  <div>
+    <%= d.label :days %>
+    <%= d.number_field :days %>
+  </div>
+  <div>
+    <%= d.label :carrier_id %>
+    <%= d.collection_select :carrier_id, @carriers, :id, :brand_name%>
+  </div>
+  <div>
+    <%= d.submit 'Salvar' %>
+  </div>
+
+  <% end %>
+  <hr>
+  <div>
+    <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', delivery_periods_path %>
+  </div>
+
+
+</section>
+
+

@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      delivery_period: "Tabela de Prazo"
+    attributes:
+      delivery_period:
+        band_name: "Tabela"
+        min_distance: "Distância mínima"
+        max_distance: "Distância máxima"
+        days: "Dias"
+        carrier_id: "Transportadora"
