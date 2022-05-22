@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      warehouse: 'Depósito'
+    attributes:
+      warehouse:
+        name: "Nome"
+        address: "Endereço"
+        city: "Cidade"
+        state: "Estado"
+        code: "Código"

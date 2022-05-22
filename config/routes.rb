@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :quotations, only: [:index, :create, :new]
   resources :customers, only: [:index, :new, :create]
   resources :products, only: [:index, :new, :create]
+  resources :warehouses, only: [:index, :new, :create]
 end

@@ -1,0 +1,41 @@
+<section id=warehouse_new>
+  <h1>Novo Depósito</h1>
+
+  <% if(@warehouse.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @warehouse.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= form_with(model: @warehouse )  do  |w| %>
+    <div>
+      <%= w.label :name %>
+      <%= w.text_field :name %>
+    </div>
+    <div>
+      <%= w.label :address %>
+      <%= w.text_field :address %>
+    </div>
+    <div>
+      <%= w.label :city %>
+      <%= w.text_field :city %>
+    </div>
+    <div>
+      <%= w.label :state %>
+      <%= w.text_field :state %>
+    </div>
+    <div>
+      <%= w.label :code %>
+      <%= w.text_field :code %>
+    </div>
+    <div>
+      <%= w.submit 'Salvar' %>
+    </div>
+  <% end %>
+  <hr>
+<div>
+  <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', warehouses_path %> | <%= link_to 'Cadastrar Depósito', new_warehouse_path %>
+</div>
+</section>
