@@ -1,0 +1,12 @@
+<section id=service_order_edit>
+<h1>Alterar Ordem de Serviço</h1>
+    <% if(@service_order.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @service_order.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
+<%= render 'form_service_order' %>

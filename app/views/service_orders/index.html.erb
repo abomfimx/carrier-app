@@ -1,0 +1,43 @@
+<section id=service_order_list>
+<h1>Lista de Ordens de Serviço</h1>
+<% if @service_orders.any? %>
+  <table>
+      <thead>
+      <tr>
+        <th>Data da OS:</th>
+        <th>Código de Rastreio:</th>
+        <th>Situação da Ordem:</th>
+        <th>Distância:</th>
+        <th>Produto:</th>
+        <th>Cliente:</th>
+        <th>Depósito:</th>
+        <th>Veículo:</th>
+        <th>Transportadora:</th>
+      </tr>  
+      </thead>
+      <tbody>
+        <% @service_orders.each do |s| %>
+          <tr>
+            <td><%= s.placed_date%></td>
+            <td><%= link_to s.tracking_id, edit_service_order_path(s) %></td>
+            <%# <td><%= s.tracking_id %></td>
+            <td><%= s.status %></td>
+            <td><%= s.distance %></td>
+            <td><%= s.product.product_name %></td>
+            <td><%= s.customer.name %></td>
+            <td><%= s.warehouse.code %></td>
+            <td><%= s.vehicule.brand_name == 'Indefinido' ? 'Indefinido' : s.vehicule.plate_number %></td>
+            <td><%= s.carrier.brand_name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else  %>
+    <p>Não existe Ordem de Serviço cadastrada</p>
+<% end %>
+<hr>
+<div>
+  <%= link_to 'Home', root_path %>  | <%= link_to 'Cadastrar Ordem de Serviço', new_service_order_path %> 
+</div>
+
+</section>

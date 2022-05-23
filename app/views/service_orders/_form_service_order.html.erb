@@ -1,0 +1,46 @@
+<%= form_with(model: @service_order) do |s| %>
+  <div>
+    <%= s.label :placed_date %>
+    <%= s.date_field :placed_date %>
+  </div>
+  <div>
+    <%= s.label :tracking_id %>
+    <%= s.text_field :tracking_id %>
+  </div>
+  <div>
+    <%= s.label :status %>
+    <%= s.select :status, ServiceOrder.statuses.keys %>
+  </div>
+  <div>
+    <%= s.label :distance %>
+    <%= s.number_field :distance %>
+  </div>
+  <div>
+    <%= s.label :carrier_id %>
+    <%= s.collection_select :carrier_id, @carriers, :id, :brand_name %>
+  </div>
+  <div>
+    <%= s.label :customer_id %>
+    <%= s.collection_select :customer_id, @customers, :id, :name %>
+  </div>
+  <div>
+    <%= s.label :warehouse_id %>
+    <%= s.collection_select :warehouse_id, @warehouses, :id, :code %>
+  </div>
+  <div>
+    <%= s.label :vehicule_id %>
+    <%= s.collection_select :vehicule_id, @vehicules, :id, :plate_number %>
+  </div>
+  <div>
+    <%= s.label :product_id %>
+    <%= s.collection_select :product_id, @products, :id, :product_name %>
+  </div>
+  <div>
+    <%= s.submit 'Salvar' %>
+  </div>
+
+  <% end %>
+  <hr>
+  <div>
+    <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', service_orders_path %>
+  </div>

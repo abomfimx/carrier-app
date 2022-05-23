@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_21_225222) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_22_172830) do
   create_table "carrier_prices", force: :cascade do |t|
     t.string "band_name"
     t.integer "min_volume"
@@ -85,6 +85,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_225222) do
     t.index ["carrier_id"], name: "index_quotations_on_carrier_id"
   end
 
+  create_table "service_orders", force: :cascade do |t|
+    t.date "placed_date"
+    t.string "tracking_id"
+    t.integer "distance"
+    t.integer "carrier_id", null: false
+    t.integer "customer_id", null: false
+    t.integer "warehouse_id", null: false
+    t.integer "vehicule_id"
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.index ["carrier_id"], name: "index_service_orders_on_carrier_id"
+    t.index ["customer_id"], name: "index_service_orders_on_customer_id"
+    t.index ["product_id"], name: "index_service_orders_on_product_id"
+    t.index ["vehicule_id"], name: "index_service_orders_on_vehicule_id"
+    t.index ["warehouse_id"], name: "index_service_orders_on_warehouse_id"
+  end
+
   create_table "vehicules", force: :cascade do |t|
     t.string "plate_number"
     t.string "brand_name"
@@ -110,5 +129,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_225222) do
   add_foreign_key "carrier_prices", "carriers"
   add_foreign_key "delivery_periods", "carriers"
   add_foreign_key "quotations", "carriers"
+  add_foreign_key "service_orders", "carriers"
+  add_foreign_key "service_orders", "customers"
+  add_foreign_key "service_orders", "products"
+  add_foreign_key "service_orders", "vehicules"
+  add_foreign_key "service_orders", "warehouses"
   add_foreign_key "vehicules", "carriers"
 end

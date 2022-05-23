@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      service_order: "Ordem de Serviço"
+    attributes:
+      service_order:
+        placed_date: "Data da OS"
+        tracking_id: "Código de Rastreio"
+        status: "Situação da Ordem"
+        distance: "Distância"
+        carrier_id: "Transportadora"
+        customer_id: "Cliente"
+        warehouse_id: "Depósito"
+        vehicule_id: "Veículo"
+        product_id: "Produto"
