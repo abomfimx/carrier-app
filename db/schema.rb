@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_22_172830) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_23_223741) do
   create_table "carrier_prices", force: :cascade do |t|
     t.string "band_name"
     t.integer "min_volume"
@@ -104,6 +104,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_172830) do
     t.index ["warehouse_id"], name: "index_service_orders_on_warehouse_id"
   end
 
+  create_table "track_orders", force: :cascade do |t|
+    t.date "tracking_date"
+    t.string "location"
+    t.string "comments"
+    t.integer "service_order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_order_id"], name: "index_track_orders_on_service_order_id"
+  end
+
   create_table "vehicules", force: :cascade do |t|
     t.string "plate_number"
     t.string "brand_name"
@@ -134,5 +144,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_172830) do
   add_foreign_key "service_orders", "products"
   add_foreign_key "service_orders", "vehicules"
   add_foreign_key "service_orders", "warehouses"
+  add_foreign_key "track_orders", "service_orders"
   add_foreign_key "vehicules", "carriers"
 end

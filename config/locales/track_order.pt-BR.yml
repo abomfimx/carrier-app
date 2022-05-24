@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      track_order: "Rastreamento"
+    attributes:
+      track_order:
+        tracking_date: "Data"
+        location: "Localização"
+        comments: "Comentários"
+        service_order_id: "Código de Rastreio"

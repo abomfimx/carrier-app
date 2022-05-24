@@ -1,0 +1,32 @@
+<section id=track_order_list>
+<h1>Relatório de Rastreamento </h1>
+<% if @track_orders.any? %>
+  <table>
+      <thead>
+      <tr>
+        <th>Data:</th>
+        <th>Localização:</th>
+        <th>Comentários:</th>
+        <th>Código de Rastreio:</th>
+      </tr>  
+      </thead>
+      <tbody>
+        <% @track_orders.each do |t| %>
+          <tr>
+            <td><%= t.tracking_date%></td>
+            <td><%= t.location %></td>
+            <td><%= t.comments %></td>
+            <td><%= t.service_order.tracking_id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else  %>
+    <p>Não há histórico de rastreio</p>
+<% end %>
+<hr>
+<div>
+  <%= link_to 'Home', root_path %>  | <%= link_to 'Novo Registro', new_track_order_path %> 
+</div>
+
+</section>

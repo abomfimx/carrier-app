@@ -1,0 +1,37 @@
+<section id=track_order_new>
+<h1>Novo Registro de Rastreio</h1>
+    <% if(@track_order.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @track_order.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
+<%= form_with(model: @track_order) do |t| %>
+  <div>
+    <%= t.label :tracking_date %>
+    <%= t.date_field :tracking_date %>
+  </div>
+  <div>
+    <%= t.label :location %>
+    <%= t.text_field :location %>
+  </div>
+  <div>
+    <%= t.label :comments %>
+    <%= t.text_area :comments %>
+  </div>
+  <div>
+    <%= t.label :service_order_id %>
+    <%= t.collection_select :service_order_id, @service_orders, :id, :tracking_id %>
+  </div>
+  <div>
+    <%= t.submit 'Salvar' %>
+  </div>
+
+  <% end %>
+  <hr>
+  <div>
+    <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', service_orders_path %>
+  </div>
