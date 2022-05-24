@@ -13,7 +13,13 @@
     <header>
       <h1>Sistema de Entregas</h1>
       <nav>
-        <%= link_to 'Transportadoras', carriers_path %> | <%= link_to 'Veículos', vehicules_path %> | <%= link_to 'Preços', carrier_prices_path %> | <%= link_to 'Prazos', delivery_periods_path %> | <%= link_to 'Orçamentos', quotations_path %> | <%= link_to 'Clientes', customers_path %> | <%= link_to 'Produtos', products_path %> | <%= link_to 'Depósitos', warehouses_path %> | <%= link_to 'Ordem de Serviço', service_orders_path %> | <%= link_to 'Rastreamento', track_orders_path %>
+        <%= link_to 'Transportadoras', carriers_path %> | <%= link_to 'Veículos', vehicules_path %> | <%= link_to 'Preços', carrier_prices_path %> | <%= link_to 'Prazos', delivery_periods_path %> | <%= link_to 'Orçamentos', quotations_path %> | <%= link_to 'Clientes', customers_path %> | <%= link_to 'Produtos', products_path %> | <%= link_to 'Depósitos', warehouses_path %> | <%= link_to 'Ordem de Serviço', service_orders_path %> | <%= link_to 'Rastreamento', track_orders_path %> |
+        <% if user_signed_in? %>
+          <%= current_user.email %> |
+          <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'Entrar', new_user_session_path %>
+         <% end %>
       </nav>
     </header>
     <main>
