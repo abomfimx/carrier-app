@@ -1,5 +1,7 @@
 class CarriersController < ApplicationController
   before_action :set_carrier, only: [:show]
+  before_action :authenticate_user!, only: [:index, :show, :new, :create]
+
   def index 
     @carriers = Carrier.all
   end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuário visita a tela de Produtos' do
-  it 'e vê header Lista de Clientes' do
+  it 'e vê header Lista de Produtos' do
     # Arrange
     # Act
     visit root_path

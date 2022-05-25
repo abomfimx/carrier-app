@@ -1,17 +1,34 @@
 require 'rails_helper'
 
 describe 'Usuário visita a tela de Transportadoras' do
-  it 'e vê header Lista de Trasnportadoras' do 
-    # Arrange 
+  it 'se estiver autenticado' do
+    # Arrange
     # Act
     visit(root_path)
     within('nav') do
       click_on 'Transportadoras'
     end
+    # Assert
+    expect(current_path).to eq new_user_session_path
+
+  end
+
+  it 'e vê header Lista de Transportadoras' do 
+    # Arrange 
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
+    # Act
+    login_as(user)
+    visit(root_path)
+    within('nav') do
+      click_on 'Transportadoras'
+    end
+    # Assert
+    expect(current_path).to eq carriers_path
   end
 
   it 'e vê as transportadoras cadastradas' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
                     registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
                     state: 'SP')
@@ -19,6 +36,7 @@ describe 'Usuário visita a tela de Transportadoras' do
                     registration_number: '66800929000103', address: 'Av. Brasil, 95', city: 'Goiania',
                     state: 'GO')
     # Act 
+    login_as(user)
     visit(root_path)
     click_on 'Transportadoras'
 
@@ -35,7 +53,9 @@ describe 'Usuário visita a tela de Transportadoras' do
 
   it 'e não existem transportadoras cadastradas' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     # Act
+    login_as(user)
     visit(root_path)
     click_on 'Transportadoras'
     # Assert

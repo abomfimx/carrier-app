@@ -3,10 +3,12 @@ require 'rails_helper'
 describe 'Usuário vê detalhes da Transportadora' do
   it 'a partir da tela inicial' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logística S/A',  domain_name: 'xpto.com.br', active_state: 'false', 
                     registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
                     state: 'SP')
     # Act
+    login_as(user)
     visit(root_path)
     within('nav') do
       click_on 'Transportadoras'
@@ -26,11 +28,13 @@ describe 'Usuário vê detalhes da Transportadora' do
 
   it 'e volta para a tela inicial' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logística S/A',  domain_name: '@xpto.com.br', active_state: false, 
                     registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
                     state: 'SP')
 
     # Act
+    login_as(user)
     visit root_path
     click_on 'Transportadoras'
     click_on 'XPTO Trans'

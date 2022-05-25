@@ -3,7 +3,13 @@ require 'rails_helper'
 describe 'Usuário cadastra uma transportadora' do
   it 'a partir da tela inicial' do
     # Arrange
+    carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: 'xpto.com.br', active_state: false, 
+      registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
+      state: 'SP')
+
+    user = User.create!(name: 'Claudio', email: 'claudio@xpto.com.br', password: 'password')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Transportadoras'
     click_on 'Cadastrar Transportadora'
@@ -22,7 +28,9 @@ describe 'Usuário cadastra uma transportadora' do
 
   it 'com sucesso' do 
     # Arrange 
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Transportadoras'
     click_on 'Cadastrar Transportadora'
@@ -51,7 +59,9 @@ describe 'Usuário cadastra uma transportadora' do
 
   it 'com dados incompletos' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Transportadoras'
     click_on 'Cadastrar Transportadora'
