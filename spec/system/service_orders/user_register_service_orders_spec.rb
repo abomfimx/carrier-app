@@ -1,9 +1,23 @@
 require 'rails_helper'
 
 describe 'Usuário cadastra uma Ordem de Serviço' do
+  it ' de precisa estar autenticado' do
+    # Arrange
+
+    # Act
+    visit root_path
+    click_on 'Ordem de Serviço'
+
+    # Assert
+    expect(current_path).to eq new_user_session_path
+  end
+
+
   it 'a partir da tela inicial' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     # Act
+    login_as(user)
     visit root_path
       within('nav') do
       click_on 'Ordem de Serviço'
@@ -25,6 +39,7 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
 
   it 'com sucesso' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
                     registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
                     state: 'SP')
@@ -37,12 +52,13 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
     Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                      email: 'joana@gmailx.com.br')
 
+    allow(SecureRandom).to receive(:alphanumeric).and_return('XXXX-YYYYY-ZZZZ')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Ordem de Serviço'
     click_on 'Cadastrar Ordem de Serviço'
     fill_in 'Data da OS', with: '2022-05-21'
-    fill_in 'Código de Rastreio', with: 'XXXX-YYYYY-ZZZZ'
     fill_in 'Distância', with: '100'
     select 'XPTO Trans', from: 'Transportadora'
     select 'Joana da Silva', from: 'Cliente'
@@ -51,6 +67,7 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
     select 'Samsung J11', from: 'Produto'
     click_on 'Salvar'
 
+    
     # Assert 
     expect(page).to have_content('Ordem de Serviço cadastrada com sucesso')
     expect(page).to have_content('2022-05-21')
@@ -66,6 +83,7 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
 
   it 'com dados incompletos' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
                               registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
                               state: 'SP')
@@ -77,7 +95,9 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
 
     Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                     email: 'joana@gmailx.com.br')  
+    allow(SecureRandom).to receive(:alphanumeric).and_return('XXXX-YYYYY-ZZZZ')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Ordem de Serviço'
     click_on 'Cadastrar Ordem de Serviço'
@@ -94,7 +114,6 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
     # Assert 
     expect(page).to have_content('Ordem de Serviço não cadastrada')
     expect(page).to have_content('Data da OS não pode ficar em branco')
-    expect(page).to have_content('Código de Rastreio não pode ficar em branco')
     expect(page).to have_content('Distância não pode ficar em branco')
 
   end

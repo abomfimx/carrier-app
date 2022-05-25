@@ -12,6 +12,7 @@ describe 'Usuário visita a tela de Ordem de Serviço' do
 
   it 'e vê as OS cadastradas' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
                               registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
                               state: 'SP')
@@ -24,9 +25,10 @@ describe 'Usuário visita a tela de Ordem de Serviço' do
     customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                                 email: 'joana@gmailx.com.br')
 
-    ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+    s_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
 
     # Act 
+    login_as(user)
     visit root_path
     click_on 'Ordem de Serviço'
 
@@ -44,7 +46,8 @@ describe 'Usuário visita a tela de Ordem de Serviço' do
 
     expect(page).to have_content('2022-05-21')
     expect(page).to have_content('Pendente')
-    expect(page).to have_content('XXXX-YYYYY-ZZZZ')
+    expect(page).to have_content(s_order.tracking_id)
+    # expect(page).to have_content('XXXX-YYYYY-ZZZZ')
     expect(page).to have_content('110')
     expect(page).to have_content('XPTO Trans')
     expect(page).to have_content('Joana da Silva')
@@ -57,7 +60,9 @@ describe 'Usuário visita a tela de Ordem de Serviço' do
 
   it 'e não existe Ordem de Serviço cadastradas' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Ordem de Serviço'
     # Assert

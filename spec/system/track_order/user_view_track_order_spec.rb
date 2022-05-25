@@ -27,11 +27,11 @@ describe 'Usuário visita a tela de Rastreamento' do
     customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
         email: 'joana@gmailx.com.br')
 
-    service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Aprovado', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+    service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Aprovado', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
      
-    TrackOrder.create!( tracking_date: '2022-05-22', location: 'Araraquara', comments: 'Saiu do depósito de Araraquara', service_order: service_order)
+    t_order_1 = TrackOrder.create!( tracking_date: '2022-05-22', location: 'Araraquara', comments: 'Saiu do depósito de Araraquara', service_order: service_order)
 
-    TrackOrder.create!( tracking_date: '2022-05-23', location: 'Ribeirão Preto', comments: 'Chegou no depósito de Ribeirão Preto', service_order: service_order)
+    t_order_2 = TrackOrder.create!( tracking_date: '2022-05-23', location: 'Ribeirão Preto', comments: 'Chegou no depósito de Ribeirão Preto', service_order: service_order)
     # Act
     visit root_path
     within('nav') do
@@ -41,12 +41,12 @@ describe 'Usuário visita a tela de Rastreamento' do
     expect(page).to have_content('22-05-22')
     expect(page).to have_content('Araraquara')
     expect(page).to have_content('Saiu do depósito de Araraquara')
-    expect(page).to have_content('XXXX-YYYYY-ZZZZ')
+    expect(page).to have_content(service_order.tracking_id)
     
     expect(page).to have_content('22-05-23')
     expect(page).to have_content('Ribeirão Preto')
     expect(page).to have_content('Chegou no depósito de Ribeirão Preto')
-    expect(page).to have_content('XXXX-YYYYY-ZZZZ')
+    expect(page).to have_content(service_order.tracking_id)
   end
 
   it 'não existe Histórico de Rastreamento' do

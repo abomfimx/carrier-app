@@ -13,6 +13,7 @@ class User < ApplicationRecord
     domain_list = Carrier.where(active_state: true).collect(&:domain_name)
     user_domain = email.split('@')[1]
 
+    
     if domain_list.include?(user_domain)
       v_carrier = Carrier.find_by_domain_name(user_domain)
       self.carrier_id = v_carrier.id

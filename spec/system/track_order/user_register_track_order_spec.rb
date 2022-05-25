@@ -32,7 +32,7 @@ describe 'Usuário cadastra um Registro de Rastreio' do
     customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
         email: 'joana@gmailx.com.br')
 
-    service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Aprovado', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+    service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Aprovado', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
      
 
     # Act
@@ -52,7 +52,7 @@ describe 'Usuário cadastra um Registro de Rastreio' do
     expect(page).to have_content('2022-05-21')
     expect(page).to have_content('Araraquara')
     expect(page).to have_content('Deixou o depósito de Araraquara')
-    expect(page).to have_content('XXXX-YYYYY-ZZZZ')
+    expect(page).to have_content(service_order.tracking_id)
   end
 
   it 'com dados incompletos' do

@@ -1,4 +1,5 @@
 class ServiceOrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :index]
   before_action :set_service_order, only: [:edit, :update]
 
   def index 

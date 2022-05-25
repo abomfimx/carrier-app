@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Usuário edita uma Orderm de Serviço' do
   it 'a partir da Lista de OS' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
                               registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
                               state: 'SP')
@@ -15,17 +16,19 @@ describe 'Usuário edita uma Orderm de Serviço' do
     customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                     email: 'joana@gmailx.com.br')
 
-    ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicule, product: product)
+    s_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', 
+      distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicule, product: product)
 
     # Act
+    login_as(user)
     visit root_path
     click_on 'Ordem de Serviço'
-    click_on 'XXXX-YYYYY-ZZZZ'
+    click_on s_order.tracking_id
  
     # Assert
     expect(page).to have_content 'Alterar Ordem de Serviço'
     expect(page).to have_field('Data da OS', with: '2022-05-21')
-    expect(page).to have_field('Código de Rastreio', with: 'XXXX-YYYYY-ZZZZ')
+    expect(page).to have_field('Código de Rastreio', with: s_order.tracking_id)
     expect(page).to have_field('Situação da Ordem', with: 'Pendente')
     expect(page).to have_field('Distância', with: 110 )
     expect(page).to have_field('Cliente', with: '1')
@@ -41,6 +44,7 @@ describe 'Usuário edita uma Orderm de Serviço' do
 
   it 'com sucesso' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
       registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
       state: 'SP')
@@ -58,14 +62,15 @@ describe 'Usuário edita uma Orderm de Serviço' do
     Customer.create!(name: 'José da Silva', address: 'Rua do Curtume, 300', city: 'São Paulo', state: 'SP', cpf:'00846123457', 
       email: 'jose@gmailx.com.br')
 
-    ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicule, product: product)
+    s_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicule, product: product)
 
     # Act 
+    login_as(user)
     visit root_path
     click_on 'Ordem de Serviço'
-    click_on 'XXXX-YYYYY-ZZZZ'
+    click_on s_order.tracking_id
     fill_in 'Data da OS', with: '2022-05-22'
-    fill_in 'Código de Rastreio', with: 'XXXX-YYYYY-ZZZZ'
+    expect(page).to have_field('Código de Rastreio', with: s_order.tracking_id)
     fill_in 'Distância', with: '200'
     select 'XPTO Trans', from: 'Transportadora'
     select 'José da Silva', from: 'Cliente'
@@ -77,6 +82,7 @@ describe 'Usuário edita uma Orderm de Serviço' do
 
   it 'e mantém os campos obrigatórios' do
     # Arrange
+    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
       registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
       state: 'SP')
@@ -90,15 +96,16 @@ describe 'Usuário edita uma Orderm de Serviço' do
     customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
     email: 'joana@gmailx.com.br')
 
-    ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicule, product: product)
+   s_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicule, product: product)
 
 
     # Act 
+    login_as(user)
     visit root_path
     click_on 'Ordem de Serviço'
-    click_on 'XXXX-YYYYY-ZZZZ'
+    click_on s_order.tracking_id
     fill_in 'Data da OS', with: ''
-    fill_in 'Código de Rastreio', with: ''
+    fill_in 'Código de Rastreio', with: 's_order.tracking_id'
     fill_in 'Distância', with: ''
     select 'XPTO Trans', from: 'Transportadora'
     select 'Joana da Silva', from: 'Cliente'
@@ -110,7 +117,6 @@ describe 'Usuário edita uma Orderm de Serviço' do
     # Assert
     expect(page).to have_content('Não foi possível atualizar a Ordem de Serviço')
     expect(page).to have_content('Data da OS não pode ficar em branco')
-    expect(page).to have_content('Código de Rastreio não pode ficar em branco')
     expect(page).to have_content('Distância não pode ficar em branco')
   end
 end
