@@ -1,0 +1,20 @@
+<section id=Orçamento_detail>
+<div>
+  <h2>Orçamento SHOW </h2>
+  <dl>
+    <dt>Data do Orçamento:</dt>
+    <dd><%= @quotation.quotation_date.to_date %></dd>
+    <dt>Volume:</dt>
+    <dd><%= (@quotation.height * @quotation.width * @quotation.depth)/1_000_000.00 %>m3</dd>
+    <dt>Volume:</dt>
+    <dd><%= @calculo_volume %>m3</dd>
+  </dl>
+  <hr>
+</div>
+
+
+<div>
+  <%= link_to 'Home', root_path  %> 
+</div>
+
+</section>

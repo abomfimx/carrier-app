@@ -4,4 +4,7 @@ class Warehouse < ApplicationRecord
   validates :code, uniqueness: true
   validates :code, length: { is: 3 }
 
+  def extended_description
+    "#{code} - #{city}"
+  end
 end

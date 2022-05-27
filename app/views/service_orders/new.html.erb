@@ -8,5 +8,40 @@
       <% end %>
     </ul>
   <% end %>
+  <%= form_with(model: @service_order) do |s| %>
+    <div>
+      <%= s.label :placed_date %>
+      <%= s.date_field :placed_date %>
+    </div>
+    <div>
+      <%= s.label :distance %>
+      <%= s.number_field :distance %>
+    </div>
+    <div>
+      <%= s.label :carrier_id %>
+      <%= s.collection_select :carrier_id, @carriers, :id, :extended_description %>
+    </div>
+    <div>
+      <%= s.label :customer_id %>
+      <%= s.collection_select :customer_id, @customers, :id, :extended_description %>
+    </div>
+    <div>
+      <%= s.label :warehouse_id %>
+      <%= s.collection_select :warehouse_id, @warehouses, :id, :extended_description %>
+    </div>
+
+    <div>
+      <%= s.label :product_id %>
+      <%= s.collection_select :product_id, @products, :id, :product_name %>
+    </div>
+    <div>
+      <%= s.submit 'Salvar' %>
+    </div>
+
+    <% end %>
+    <hr>
+    <div>
+      <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', service_orders_path %>
+    </div>
+
 </section>
-<%= render 'form_service_order' %>

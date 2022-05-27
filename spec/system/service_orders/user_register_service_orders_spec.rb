@@ -27,13 +27,10 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
     # Assert
     expect(page).to have_content('Nova Ordem de Serviço')
     expect(page).to have_content('Data da OS')
-    expect(page).to have_content('Código de Rastreio')
-    expect(page).to have_content('Situação da Ordem')
     expect(page).to have_content('Distância')
     expect(page).to have_content('Transportadora')
     expect(page).to have_content('Cliente')
     expect(page).to have_content('Depósito')
-    expect(page).to have_content('Veículo')
     expect(page).to have_content('Produto')
   end
 
@@ -63,7 +60,6 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
     select 'XPTO Trans', from: 'Transportadora'
     select 'Joana da Silva', from: 'Cliente'
     select 'AQA', from: 'Depósito'
-    select 'ASD4493', from: 'Veículo'
     select 'Samsung J11', from: 'Produto'
     click_on 'Salvar'
 
@@ -77,7 +73,6 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
     expect(page).to have_content('XPTO Trans')
     expect(page).to have_content('Joana da Silva')
     expect(page).to have_content('AQA')
-    expect(page).to have_content('ASD4493')
     expect(page).to have_content('Samsung J11')
   end
 
@@ -95,19 +90,17 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
 
     Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                     email: 'joana@gmailx.com.br')  
-    allow(SecureRandom).to receive(:alphanumeric).and_return('XXXX-YYYYY-ZZZZ')
+
     # Act
     login_as(user)
     visit root_path
     click_on 'Ordem de Serviço'
     click_on 'Cadastrar Ordem de Serviço'
     fill_in 'Data da OS', with: ''
-    fill_in 'Código de Rastreio', with: ''
     fill_in 'Distância', with: ''
     select 'XPTO Trans', from: 'Transportadora'
     select 'Joana da Silva', from: 'Cliente'
     select 'AQA', from: 'Depósito'
-    select 'ASD4493', from: 'Veículo'
     select 'Samsung J11', from: 'Produto'
     click_on 'Salvar'
 

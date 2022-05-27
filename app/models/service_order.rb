@@ -6,7 +6,6 @@ class ServiceOrder < ApplicationRecord
   belongs_to :vehicule, optional: true
   belongs_to :product
   validates :placed_date, :status, :tracking_id, :distance, presence: true
-  # validates :placed_date, :status, :distance, presence: true
   validates :tracking_id, uniqueness: true
   validates :tracking_id, length: { is: 15 }
 

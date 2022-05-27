@@ -3,4 +3,9 @@ class Carrier < ApplicationRecord
   validates :registration_number, uniqueness: true
   validates :registration_number, length: { is: 14 }
   has_many :vehicules
+
+
+  def extended_description
+    "#{brand_name} - CNPJ #{registration_number}"
+  end
 end
