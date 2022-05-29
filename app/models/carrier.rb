@@ -3,6 +3,11 @@ class Carrier < ApplicationRecord
   validates :registration_number, uniqueness: true
   validates :registration_number, length: { is: 14 }
   has_many :vehicules
+  has_many :service_orders
+  has_many :quotations
+  has_many :carrier_prices
+  has_many :delivery_periods
+  has_many :users
 
 
   def extended_description

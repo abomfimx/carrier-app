@@ -36,10 +36,13 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
 
   it 'com sucesso' do
     # Arrange
-    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
     carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
                     registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
                     state: 'SP')
+
+    claudia = User.create!(name: 'Claudia', email: 'claudia@xpto.com.br', password: 'password', 
+                          carrier: carrier)
+
     Product.create!(product_name: 'Samsung J11', weight: 300, width: 10, height: 18,  depth: 1, sku: 'CEL-J11CEL-XYZ7499')
 
     Warehouse.create!(name: 'Depósito Regional Interior - 5', city: 'Araraquara', address: 'Avenida Marginal, 1000', state: 'SP', code: 'AQA')
@@ -51,11 +54,11 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
 
     allow(SecureRandom).to receive(:alphanumeric).and_return('XXXX-YYYYY-ZZZZ')
     # Act
-    login_as(user)
+    login_as(claudia)
     visit root_path
     click_on 'Ordem de Serviço'
     click_on 'Cadastrar Ordem de Serviço'
-    fill_in 'Data da OS', with: '2022-05-21'
+    fill_in 'Data da OS', with: '21-05-2022'
     fill_in 'Distância', with: '100'
     select 'XPTO Trans', from: 'Transportadora'
     select 'Joana da Silva', from: 'Cliente'
@@ -66,7 +69,7 @@ describe 'Usuário cadastra uma Ordem de Serviço' do
     
     # Assert 
     expect(page).to have_content('Ordem de Serviço cadastrada com sucesso')
-    expect(page).to have_content('2022-05-21')
+    expect(page).to have_content('21/05/2022')
     expect(page).to have_content('XXXX-YYYYY-ZZZZ')
     expect(page).to have_content('Pendente')
     expect(page).to have_content('100')

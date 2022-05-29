@@ -17,7 +17,7 @@ RSpec.describe ServiceOrder, type: :model do
       customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                       email: 'joana@gmailx.com.br')
 
-      service_order = ServiceOrder.new(placed_date: '2022-05-27', status: 'Pendente', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)     
+      service_order = ServiceOrder.new(placed_date: '2022-05-27', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)     
 
       # Act
       service_order.save!
@@ -43,9 +43,9 @@ RSpec.describe ServiceOrder, type: :model do
       customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                       email: 'joana@gmailx.com.br')
 
-      so_1 = ServiceOrder.create!(placed_date: '2022-05-27', status: 'Pendente', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)     
+      so_1 = ServiceOrder.create!(placed_date: '2022-05-27', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)     
 
-      so_2 = ServiceOrder.new(placed_date: '2022-05-27', status: 'Pendente', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+      so_2 = ServiceOrder.new(placed_date: '2022-05-27', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
 
       # Act
       so_2.save!
@@ -73,7 +73,7 @@ RSpec.describe ServiceOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                         email: 'joana@gmailx.com.br')
 
-        service_order = ServiceOrder.new(placed_date: '', status: 'Pendente',  distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+        service_order = ServiceOrder.new(placed_date: '',  distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
 
         # Act
         # Assert
@@ -117,7 +117,7 @@ RSpec.describe ServiceOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                         email: 'joana@gmailx.com.br')
 
-        service_order = ServiceOrder.new(placed_date: '2022-05-21', status: 'Pendente',  distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+        service_order = ServiceOrder.new(placed_date: '2022-05-21', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
 
         # Act
         # Assert
@@ -139,7 +139,7 @@ RSpec.describe ServiceOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                         email: 'joana@gmailx.com.br')
 
-        service_order = ServiceOrder.new(placed_date: '2022-05-21', status: 'Pendente', distance: '', carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+        service_order = ServiceOrder.new(placed_date: '2022-05-21', distance: '', carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
 
         # Act
         # Assert
@@ -161,7 +161,7 @@ RSpec.describe ServiceOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                         email: 'joana@gmailx.com.br')
 
-        service_order = ServiceOrder.new(placed_date: '2022-05-21', status: 'Pendente', distance: 110, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+        service_order = ServiceOrder.new(placed_date: '2022-05-21', distance: 110, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
 
         # Act
         # Assert
@@ -183,7 +183,7 @@ RSpec.describe ServiceOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                         email: 'joana@gmailx.com.br')
 
-        service_order = ServiceOrder.new(placed_date: '2022-05-21', status: 'Pendente', distance: 110, carrier: carrier, warehouse: warehouse, vehicule: vehicle, product: product)
+        service_order = ServiceOrder.new(placed_date: '2022-05-21', distance: 110, carrier: carrier, warehouse: warehouse, vehicule: vehicle, product: product)
 
         # Act
         # Assert
@@ -205,7 +205,7 @@ RSpec.describe ServiceOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                         email: 'joana@gmailx.com.br')
 
-        service_order = ServiceOrder.new(placed_date: '2022-05-21', status: 'Pendente', distance: 110, carrier: carrier, customer: customer, vehicule: vehicle, product: product)
+        service_order = ServiceOrder.new(placed_date: '2022-05-21', distance: 110, carrier: carrier, customer: customer, vehicule: vehicle, product: product)
 
         # Act
         # Assert
@@ -227,7 +227,7 @@ RSpec.describe ServiceOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                         email: 'joana@gmailx.com.br')
 
-        service_order = ServiceOrder.new(placed_date: '2022-05-21', status: 'Pendente', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, product: product)
+        service_order = ServiceOrder.new(placed_date: '2022-05-21', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, product: product)
 
         # Act
         # Assert
@@ -249,7 +249,7 @@ RSpec.describe ServiceOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                         email: 'joana@gmailx.com.br')
 
-        service_order = ServiceOrder.new(placed_date: '2022-05-21', status: 'Pendente', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle)
+        service_order = ServiceOrder.new(placed_date: '2022-05-21', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle)
 
         # Act
         # Assert

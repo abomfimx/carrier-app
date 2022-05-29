@@ -27,7 +27,7 @@ describe 'Usuário visita a tela de Rastreamento' do
     customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
         email: 'joana@gmailx.com.br')
 
-    service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Aprovado', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+    service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'approved', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
      
     t_order_1 = TrackOrder.create!( tracking_date: '2022-05-22', location: 'Araraquara', comments: 'Saiu do depósito de Araraquara', service_order: service_order)
 

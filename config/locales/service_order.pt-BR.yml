@@ -1,4 +1,8 @@
 pt-BR:
+  pending: "Pendente"
+  approved: "Aprovado"
+  rejected: "Recusado"
+  delivered: "Entregue"
   activerecord:
     models:
       service_order: "Ordem de Serviço"

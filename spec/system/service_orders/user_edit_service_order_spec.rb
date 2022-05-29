@@ -1,122 +1,176 @@
 require 'rails_helper'
 
 describe 'Usuário edita uma Orderm de Serviço' do
-  it 'a partir da Lista de OS' do
-    # Arrange
-    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
-    carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
-                              registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
-                              state: 'SP')
-    product = Product.create!(product_name: 'Samsung J11', weight: 300, width: 10, height: 18,  depth: 1, sku: 'CEL-J11CEL-XYZ7499')
+  it 'e deve estar autenticado' do
+    carrier1 = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',
+      domain_name: 'xpto.com.br', active_state: false, 
+      registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú', state: 'SP')
 
-    warehouse =Warehouse.create!(name: 'Depósito Regional Interior - 5', city: 'Araraquara', address: 'Avenida Marginal, 1000', state: 'SP', code: 'AQA')
+    claudia = User.create!(name: 'Claudia', email: 'claudia@xpto.com.br', password: 'password', 
+    carrier: carrier1)
 
-    vehicule = Vehicule.create!(plate_number: 'ASD4493', brand_name: 'Volvo', vehicle_model: 'VM4X2R', year: '2021', max_load: 15_800, carrier: carrier)
+    product = Product.create!(product_name: 'Samsung J11', weight: 300, width: 10, height: 18,  depth: 1, 
+      sku: 'CEL-J11CEL-XYZ7499')
 
-    customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
-                    email: 'joana@gmailx.com.br')
+    warehouse =Warehouse.create!(name: 'Depósito Regional Interior - 5', city: 'Araraquara', 
+        address: 'Avenida Marginal, 1000', state: 'SP', code: 'AQA')
+  
+    vehicule = Vehicule.create!(plate_number: 'ASD4493', brand_name: 'Volvo', vehicle_model: 'VM4X2R',
+        year: '2021', max_load: 15_800, carrier: carrier1)
+  
+    customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', 
+        state: 'SP', cpf:'00846428075', email: 'joana@gmailx.com.br')
 
-    s_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', 
-      distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicule, product: product)
+    s_order1 = ServiceOrder.create!(placed_date: '21-05-2022', distance:300, carrier: carrier1, 
+      customer: customer, warehouse: warehouse, vehicule: vehicule, 
+      product: product)
 
+    # allow(SecureRandom).to receive(:alphanumeric).and_return('XXXX-YYYYY-ZZZZ')
     # Act
-    login_as(user)
-    visit root_path
-    click_on 'Ordem de Serviço'
-    click_on s_order.tracking_id
- 
-    # Assert
-    expect(page).to have_content 'Alterar Ordem de Serviço'
-    expect(page).to have_field('Data da OS', with: '2022-05-21')
-    expect(page).to have_field('Código de Rastreio', with: s_order.tracking_id)
-    expect(page).to have_field('Situação da Ordem', with: 'Pendente')
-    expect(page).to have_field('Distância', with: 110 )
-    expect(page).to have_field('Cliente', with: '1')
-    expect(page).to have_content('Cliente Joana da Silva')
-    expect(page).to have_field('Depósito', with: '1')
-    expect(page).to have_content('Depósito AQA')
-    expect(page).to have_field('Veículo', with: '1')
-    expect(page).to have_content('Veículo ASD4493')
-    expect(page).to have_field('Produto', with: '1')
-    expect(page).to have_content('Produto Samsung J11')
+    visit service_order_path(s_order1.id)
 
+    # Arrange
+    expect(current_path).to eq new_user_session_path
   end
 
   it 'com sucesso' do
-    # Arrange
-    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
-    carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
-      registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
-      state: 'SP')
-    product = Product.create!(product_name: 'Samsung J11', weight: 300, width: 10, height: 18,  depth: 1, sku: 'CEL-J11CEL-XYZ7499')
+  # Arrange
 
-    warehouse = Warehouse.create!(name: 'Depósito Regional Interior - 5', city: 'Araraquara', address: 'Avenida Marginal, 1000', state: 'SP', code: 'AQA')
+    carrier1 = Carrier.create!(brand_name: 'ACME LOG', corporate_name: 'ACME Logistica Ltda', 
+    domain_name: 'acme.com.br', active_state: false, 
+    registration_number: '66800929000103', address: 'Av. Brasil, 95', 
+    city: 'Goiania', state: 'GO') 
 
-     Warehouse.create!(name: 'Depósito Regional Interior - 3', city: 'Ribeirão Preto', address: 'Avenida Saudade, 1000', state: 'SP', code: 'RAO')
+    carrier2 = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',
+      domain_name: 'xpto.com.br', active_state: false, 
+      registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú', state: 'SP')
 
-    vehicule = Vehicule.create!(plate_number: 'ASD4493', brand_name: 'Volvo', vehicle_model: 'VM4X2R', year: '2021', max_load: 15_800, carrier: carrier)
+    claudia = User.create!(name: 'Claudia', email: 'claudia@sistemadefrete.com.br', password: 'password', 
+    carrier: carrier2)
 
-    customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
-    email: 'joana@gmailx.com.br')
+    product = Product.create!(product_name: 'Samsung J11', weight: 300, width: 10, height: 18,  depth: 1, 
+      sku: 'CEL-J11CEL-XYZ7499')
 
-    Customer.create!(name: 'José da Silva', address: 'Rua do Curtume, 300', city: 'São Paulo', state: 'SP', cpf:'00846123457', 
-      email: 'jose@gmailx.com.br')
+    warehouse =Warehouse.create!(name: 'Depósito Regional Interior - 5', city: 'Araraquara', 
+        address: 'Avenida Marginal, 1000', state: 'SP', code: 'AQA')
 
-    s_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicule, product: product)
+    warehouse2 =Warehouse.create!(name: 'Depósito Regional Interior - 6', city: 'Ribeirao Preto', 
+          address: 'Avenida Marginal, 1000', state: 'SP', code: 'RAO')    
+  
+    vehicule = Vehicule.create!(plate_number: 'ASD4493', brand_name: 'Volvo', vehicle_model: 'VM4X2R',
+        year: '2021', max_load: 15_800, carrier: carrier1)
+  
+    customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', 
+        state: 'SP', cpf:'00846428075', email: 'joana@gmailx.com.br')
+
+    s_order = ServiceOrder.create!(placed_date: '21-05-2022', distance:300, carrier: carrier2, 
+      customer: customer, warehouse: warehouse, vehicule: vehicule, status: 'rejected',
+      product: product)
 
     # Act 
-    login_as(user)
+    login_as(claudia)
     visit root_path
     click_on 'Ordem de Serviço'
     click_on s_order.tracking_id
-    fill_in 'Data da OS', with: '2022-05-22'
+    click_on 'Editar'
+
+    fill_in 'Data da OS', with: '2022-05-27'
     expect(page).to have_field('Código de Rastreio', with: s_order.tracking_id)
     fill_in 'Distância', with: '200'
     select 'XPTO Trans', from: 'Transportadora'
-    select 'José da Silva', from: 'Cliente'
-    select 'RAO', from: 'Depósito'
-    select 'ASD4493', from: 'Veículo'
-    select 'Samsung J11', from: 'Produto'
-    click_on 'Salvar'
-  end
-
-  it 'e mantém os campos obrigatórios' do
-    # Arrange
-    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
-    carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
-      registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
-      state: 'SP')
-
-    product = Product.create!(product_name: 'Samsung J11', weight: 300, width: 10, height: 18,  depth: 1, sku: 'CEL-J11CEL-XYZ7499')
-
-    warehouse =Warehouse.create!(name: 'Depósito Regional Interior - 5', city: 'Araraquara', address: 'Avenida Marginal, 1000', state: 'SP', code: 'AQA')
-
-    vehicule = Vehicule.create!(plate_number: 'ASD4493', brand_name: 'Volvo', vehicle_model: 'VM4X2R', year: '2021', max_load: 15_800, carrier: carrier)
-
-    customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
-    email: 'joana@gmailx.com.br')
-
-   s_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicule, product: product)
-
-
-    # Act 
-    login_as(user)
-    visit root_path
-    click_on 'Ordem de Serviço'
-    click_on s_order.tracking_id
-    fill_in 'Data da OS', with: ''
-    fill_in 'Código de Rastreio', with: 's_order.tracking_id'
-    fill_in 'Distância', with: ''
-    select 'XPTO Trans', from: 'Transportadora'
     select 'Joana da Silva', from: 'Cliente'
-    select 'AQA', from: 'Depósito'
-    select 'ASD4493', from: 'Veículo'
+    # select 'approved', from: 'Situação da Ordem'
+    select 'RAO', from: 'Depósito'
+    # select 'ASD4493', from: 'Veículo'
     select 'Samsung J11', from: 'Produto'
     click_on 'Salvar'
 
     # Assert
-    expect(page).to have_content('Não foi possível atualizar a Ordem de Serviço')
-    expect(page).to have_content('Data da OS não pode ficar em branco')
-    expect(page).to have_content('Distância não pode ficar em branco')
+    expect(page).to have_content 'Ordem de Serviço atualizada com sucesso'
+    expect(page).to have_content 'XPTO Trans'
+    expect(page).to have_content '27/05/2022'
+    expect(page).to have_content 'RAO'
   end
+
+  it 'caso seja o responsável' do
+    carrier1 = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',
+      domain_name: 'xpto.com.br', active_state: false, 
+      registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú', state: 'SP')
+
+    claudia = User.create!(name: 'Claudia', email: 'claudia@xpto.com.br', password: 'password', 
+    carrier: carrier1)
+
+    carrier2 = Carrier.create!(brand_name: 'ACME LOG', corporate_name: 'ACME Logistica Ltda', 
+      domain_name: 'acme.com.br', active_state: false, 
+      registration_number: '66800929000103', address: 'Av. Brasil, 95', 
+      city: 'Goiania', state: 'GO') 
+
+    deborah = User.create!(name: 'Deborah', email: 'deborah@acme.com.br', password: 'password', carrier: carrier2)
+
+    product = Product.create!(product_name: 'Samsung J11', weight: 300, width: 10, height: 18,  depth: 1, 
+      sku: 'CEL-J11CEL-XYZ7499')
+
+    warehouse =Warehouse.create!(name: 'Depósito Regional Interior - 5', city: 'Araraquara', 
+        address: 'Avenida Marginal, 1000', state: 'SP', code: 'AQA')
+  
+    vehicule = Vehicule.create!(plate_number: 'ASD4493', brand_name: 'Volvo', vehicle_model: 'VM4X2R',
+        year: '2021', max_load: 15_800, carrier: carrier1)
+  
+    customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', 
+        state: 'SP', cpf:'00846428075', email: 'joana@gmailx.com.br')
+
+    s_order1 = ServiceOrder.create!(placed_date: '21-05-2022', distance:300, carrier: carrier1, 
+      customer: customer, warehouse: warehouse, vehicule: vehicule, 
+      product: product)
+
+    # allow(SecureRandom).to receive(:alphanumeric).and_return('XXXX-YYYYY-ZZZZ')
+    # Act
+    login_as(deborah)
+    visit edit_service_order_path(s_order1.id)
+
+    # Arrange
+    expect(current_path).to eq root_path
+  end
+
+  # it 'e mantém os campos obrigatórios' do
+  #   # Arrange
+  #   carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
+  #     registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
+  #     state: 'SP')
+    
+  #   claudia = User.create!(name: 'Claudia', email: 'claudia@xpto.com.br', password: 'password', 
+  #                         carrier: carrier)
+
+  #   product = Product.create!(product_name: 'Samsung J11', weight: 300, width: 10, height: 18,  depth: 1, sku: 'CEL-J11CEL-XYZ7499')
+
+  #   warehouse =Warehouse.create!(name: 'Depósito Regional Interior - 5', city: 'Araraquara', address: 'Avenida Marginal, 1000', state: 'SP', code: 'AQA')
+
+  #   vehicule = Vehicule.create!(plate_number: 'ASD4493', brand_name: 'Volvo', vehicle_model: 'VM4X2R', year: '2021', max_load: 15_800, carrier: carrier)
+
+  #   customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
+  #   email: 'joana@gmailx.com.br')
+
+  #  s_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicule, product: product)
+
+
+  #   # Act 
+  #   login_as(claudia)
+  #   visit root_path
+  #   click_on 'Ordem de Serviço'
+  #   click_on s_order.tracking_id
+  #   fill_in 'Data da OS', with: ''
+  #   fill_in 'Código de Rastreio', with: 's_order.tracking_id'
+  #   fill_in 'Distância', with: ''
+  #   select 'XPTO Trans', from: 'Transportadora'
+  #   select 'Joana da Silva', from: 'Cliente'
+  #   select 'AQA', from: 'Depósito'
+  #   select 'ASD4493', from: 'Veículo'
+  #   select 'Samsung J11', from: 'Produto'
+  #   click_on 'Salvar'
+
+  #   # Assert
+  #   expect(page).to have_content('Não foi possível atualizar a Ordem de Serviço')
+  #   expect(page).to have_content('Data da OS não pode ficar em branco')
+  #   expect(page).to have_content('Distância não pode ficar em branco')
+  # end
 end

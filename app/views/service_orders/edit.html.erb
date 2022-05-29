@@ -19,15 +19,15 @@
     <%= s.text_field :tracking_id, readonly: true %>
   </div>
   <div>
-    <%= s.label :status %>
-    <%= s.select :status, ServiceOrder.statuses.keys %>
+    <%#= s.label :status %>
+    <%#= s.select :status, I18n.translate(ServiceOrder.statuses.keys) %>
   </div>
   <div>
     <%= s.label :distance %>
     <%= s.number_field :distance %>
   </div>
   <div>
-    <%= s.label :carrier_id %>
+    <%= s.label :carrier_id %>:
     <%= s.collection_select :carrier_id, @carriers, :id, :brand_name %>
   </div>
   <div>

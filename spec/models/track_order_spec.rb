@@ -17,7 +17,7 @@ RSpec.describe TrackOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
             email: 'joana@gmailx.com.br')
     
-        service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Aprovado', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+        service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'approved', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
          
         track_order = TrackOrder.new( tracking_date: '', location: 'Araraquara', comments: 'Saiu do depósito de Araraquara', service_order: service_order)
     
@@ -40,7 +40,7 @@ RSpec.describe TrackOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
             email: 'joana@gmailx.com.br')
     
-        service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Aprovado', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+        service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'approved', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
             
         track_order = TrackOrder.new( tracking_date: '2022-05-23', location: '', comments: 'Chegou no depósito de Ribeirão Preto', service_order: service_order)
 
@@ -63,7 +63,7 @@ RSpec.describe TrackOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
             email: 'joana@gmailx.com.br')
     
-        service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Aprovado', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+        service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'approved', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
          
         track_order = TrackOrder.new( tracking_date: '2022-05-22', location: 'Araraquara', comments: '', service_order: service_order)
     
@@ -86,7 +86,7 @@ RSpec.describe TrackOrder, type: :model do
         customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
             email: 'joana@gmailx.com.br')
     
-        service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Aprovado', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+        service_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'approved', tracking_id: 'XXXX-YYYYY-ZZZZ', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
          
         track_order = TrackOrder.new( tracking_date: '2022-05-22', location: 'Araraquara', comments: 'Saiu do depósito de Araraquara')
     

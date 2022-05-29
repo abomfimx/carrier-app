@@ -1,6 +1,6 @@
 <section id=service_order_list>
 <h1>Lista de Ordens de Serviço</h1>
-<% if @service_orders.any? %>
+<% if @serv_orders.any? %>
   <table>
       <thead>
       <tr>
@@ -12,15 +12,15 @@
         <th>Cliente:</th>
         <th>Depósito:</th>
         <th>Veículo:</th>
-        <th>Transportadora:</th>
+        <th>Transportadora: </th>
       </tr>  
       </thead>
       <tbody>
-        <% @service_orders.each do |s| %>
+        <% @serv_orders.each do |s| %>
           <tr>
-            <td><%= s.placed_date%></td>
-            <td><%= link_to s.tracking_id, edit_service_order_path(s) %></td>
-            <td><%= s.status %></td>
+            <td><%= I18n.localize(s.placed_date)%></td>
+            <td><%= link_to s.tracking_id, service_order_path(s) %></td>
+            <td><%= I18n.translate(s.status) %></td>
             <td><%= s.distance %></td>
             <td><%= s.product.product_name %></td>
             <td><%= s.customer.name %></td>

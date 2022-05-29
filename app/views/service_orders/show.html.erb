@@ -1,0 +1,45 @@
+<section id=service_order_list>
+<h1>Ordem de Serviço</h1>
+<h4>Código de Rastreio: <%= @service_order.tracking_id %></h4>
+  <table>
+      <thead>
+      <tr>
+        <th>Data da OS:</th>
+        <th>Situação da Ordem:</th>
+        <th>Distância:</th>
+        <th>Produto:</th>
+        <th>Cliente:</th>
+        <th>Depósito:</th>
+        <th>Veículo:</th>
+        <th>Transportadora: </th>
+      </tr>  
+      </thead>
+      <tbody>
+          <tr>
+            <td><%= I18n.localize(@service_order.placed_date)%></td>
+             <td><%= I18n.translate(@service_order.status) %></td>
+            <td><%= @service_order.distance %></td>
+            <td><%= @service_order.product.product_name %></td>
+            <td><%= @service_order.customer.name %></td>
+            <td><%= @service_order.warehouse.code %></td>
+            <td><%= @service_order.vehicule_id.nil? ? "Indefinido" : @service_order.vehicule.plate_number %></td>
+            <td><%= @service_order.carrier.brand_name %></td>
+          </tr>
+      </tbody>
+    </table>
+<hr>
+<div>
+  <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', service_orders_path %>|
+  <% if current_user.admin && @service_order.delivered? == false %>
+    <%= link_to 'Editar', edit_service_order_path(@service_order.id)  %>
+  <% end %>
+  <% if @service_order.pending? %>
+
+    <%= button_to 'Pedido Recusado', rejected_service_order_path(@service_order.id) %> |
+    <%= button_to 'Pedido Aprovado', approved_service_order_path(@service_order.id) %>
+  <% elsif  @service_order.approved? %>
+      <%= button_to 'Pedido Entregue', delivered_service_order_path(@service_order.id) %> 
+  <% end %>
+</div>
+
+</section>

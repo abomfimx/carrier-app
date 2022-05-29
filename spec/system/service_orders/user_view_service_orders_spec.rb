@@ -12,10 +12,11 @@ describe 'Usuário visita a tela de Ordem de Serviço' do
 
   it 'e vê as OS cadastradas' do
     # Arrange
-    user = User.create!(name: 'Claudia', email: 'claudia@gmail.com', password: 'password')
-    carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: '@xpto.com.br', active_state: false, 
+    carrier = Carrier.create!(brand_name: 'XPTO Trans', corporate_name: 'XPTO Logistica S/A',  domain_name: 'xpto.com.br', active_state: false, 
                               registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
                               state: 'SP')
+
+    user = User.create!(name: 'Claudia', email: 'claudia@xpto.com.br', password: 'password', carrier: carrier)
     product = Product.create!(product_name: 'Samsung J11', weight: 300, width: 10, height: 18,  depth: 1, sku: 'CEL-J11CEL-XYZ7499')
 
     warehouse = Warehouse.create!(name: 'Depósito Regional Interior', city: 'Araraquara', address: 'Avenida Marginal, 1000', state: 'SP', code: 'AQA')
@@ -25,7 +26,7 @@ describe 'Usuário visita a tela de Ordem de Serviço' do
     customer = Customer.create!(name: 'Joana da Silva', address: 'Rua da Mooca, 175', city: 'São Paulo', state: 'SP', cpf:'00846428075', 
                                 email: 'joana@gmailx.com.br')
 
-    s_order = ServiceOrder.create!(placed_date: '2022-05-21', status: 'Pendente', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
+    s_order = ServiceOrder.create!(placed_date: '2022-05-21', distance: 110, carrier: carrier, customer: customer, warehouse: warehouse, vehicule: vehicle, product: product)
 
     # Act 
     login_as(user)
@@ -44,10 +45,9 @@ describe 'Usuário visita a tela de Ordem de Serviço' do
     expect(page).to have_content('Veículo')
     expect(page).to have_content('Produto')
 
-    expect(page).to have_content('2022-05-21')
+    expect(page).to have_content('21/05/2022')
     expect(page).to have_content('Pendente')
     expect(page).to have_content(s_order.tracking_id)
-    # expect(page).to have_content('XXXX-YYYYY-ZZZZ')
     expect(page).to have_content('110')
     expect(page).to have_content('XPTO Trans')
     expect(page).to have_content('Joana da Silva')
