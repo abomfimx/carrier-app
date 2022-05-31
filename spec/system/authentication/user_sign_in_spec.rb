@@ -10,7 +10,7 @@ describe 'Usuário faz autenticação' do
     within 'form' do
       fill_in 'E-mail', with: 'jose@gmail.com'
       fill_in 'Senha', with: '012345'
-      click_on 'Entrar'
+      click_on 'Login'
     end
     # Assert
     expect(page).to have_content('Login efetuado com sucesso')
@@ -30,7 +30,7 @@ describe 'Usuário faz autenticação' do
     within 'form' do
       fill_in 'E-mail', with: 'jose@gmail.com'
       fill_in 'Senha', with: '012345'
-      click_on 'Entrar'
+      click_on 'Login'
       click_on 'Sair'
     end
     # Assert

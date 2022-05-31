@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     post 'rejected', on: :member
     post 'approved', on: :member
   end
-  resources :track_orders, only: [:index, :new, :create]
+  resources :track_orders, only: [:index, :new, :create] do
+    get 'search', on: :collection
+  end
 
   resources :quotations, only: [:index, :create, :new, :show] do
     resources :quotation_details, only: [:new, :create]
