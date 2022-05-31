@@ -18,8 +18,8 @@
       <% @carrier_prices.each do |c| %>
         <tr>
           <td><%= link_to c.band_name, edit_carrier_price_path(c.id)%></td>
-          <td><%= c.min_volume %></td>
-          <td><%= c.max_volume %></td>
+          <td><%= c.min_volume/1_000.0 %></td>
+          <td><%= c.max_volume/1_000.0 %></td>
           <td><%= c.min_weight %></td>
           <td><%= c.max_weight %></td>
           <td><%= c.price %></td>

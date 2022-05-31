@@ -4,29 +4,25 @@
   <table>
       <thead>
       <tr>
+        <th>Orçamento #:</th>
         <th>Data do Orçamento:</th>
-        <th>Previsão de Entrega:</th>
-        <th>Peso:</th>
+        <th>Peso:(kg)</th>
         <th>Altura:</th>
         <th>Largura:</th>
         <th>Profundidade:</th>
         <th>Distância:</th>
-        <th>Preço:</th>
-        <th>Transportadora:</th>
       </tr>  
       </thead>
       <tbody>
         <% @quotations.each do |q| %>
           <tr>
-            <td><%= q.quotation_date%></td>
-            <td><%= q.delivery_date %></td>
-            <td><%= q.weight %></td>
+            <td><%= link_to q.quotation_code, quotation_path(q.id) %></td>
+            <td><%= I18n.localize(q.quotation_date) %></td>
+            <td><%= q.weight / 1000.0 %></td>
             <td><%= q.height %></td>
             <td><%= q.width %></td>
             <td><%= q.depth %></td>
             <td><%= q.distance%></td>
-            <td><%= q.shipping_price %></td>
-            <td><%= q.carrier.brand_name %></td>
           </tr>
         <% end %>
       </tbody>

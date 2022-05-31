@@ -1,20 +1,22 @@
 <section id=Orçamento_detail>
 <div>
-  <h2>Orçamento SHOW </h2>
+  <h2>Orçamento - <%= @quotation.quotation_code %></h2>
   <dl>
     <dt>Data do Orçamento:</dt>
-    <dd><%= @quotation.quotation_date.to_date %></dd>
+    <dd><%= I18n.localize(@quotation.quotation_date.to_date) %></dd>
     <dt>Volume:</dt>
     <dd><%= (@quotation.height * @quotation.width * @quotation.depth)/1_000_000.00 %>m3</dd>
-    <dt>Volume:</dt>
-    <dd><%= @calculo_volume %>m3</dd>
   </dl>
-  <hr>
+  <br>
 </div>
-
-
+| <% if @count_detail == 0 %>
+    <%= link_to 'Gerar Cotação', list_quotation_detail_path(@quotation.id) %> |
+  <% else %>
+    <%= link_to 'Listar Cotação', list_quotation_detail_path(@quotation.id)%> |
+  <% end %>
+<hr>
 <div>
-  <%= link_to 'Home', root_path  %> 
+  <%= link_to 'Home', root_path  %> | <%= link_to 'Voltar', quotations_path %>
 </div>
 
 </section>

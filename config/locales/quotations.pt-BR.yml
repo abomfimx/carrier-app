@@ -4,6 +4,7 @@ pt-BR:
       quotation: "Orçamento"
     attributes:
       quotation:
+        quotation_code: "Orçamento #"
         quotation_date: "Data do Orçamento"
         delivery_date: "Previsão de Entrega"
         weight: "Peso"

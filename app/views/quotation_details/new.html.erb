@@ -1,0 +1,7 @@
+<h1>Quotação para o Orçamento - <%= @quotation.quotation_code %></h1>
+
+<%= form_with(model: [@quotation, @quotation_detail]) do |f| %>
+  <%= f.label :carrier_id, 'Transportadora' %>
+  <%= f.collection_select :carrier_id, @carriers, :id, :brand_name %> 
+  <%=  %>
+<% end %>

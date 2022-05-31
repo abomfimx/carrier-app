@@ -15,10 +15,6 @@
     <%= q.date_field :quotation_date %>
   </div>
   <div>
-    <%= q.label :delivery_date %>
-    <%= q.date_field :delivery_date %>
-  </div>
-  <div>
     <%= q.label :weight %>(g)
     <%= q.number_field :weight %>
   </div>
@@ -37,14 +33,6 @@
     <div>
     <%= q.label :distance %>(km)
     <%= q.number_field :distance %>
-  </div>
-    <div>
-    <%= q.label :shipping_price %>
-    <%= q.number_field :shipping_price %>
-  </div>
-  <div>
-    <%= q.label :carrier_id %>
-    <%= q.collection_select :carrier_id, @carriers, :id, :brand_name%>
   </div>
   <div>
     <%= q.submit 'Salvar' %>

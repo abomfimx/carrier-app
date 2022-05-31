@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_25_013934) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_29_185517) do
   create_table "carrier_prices", force: :cascade do |t|
     t.string "band_name"
     t.integer "min_volume"
@@ -70,19 +70,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_25_013934) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "quotation_details", force: :cascade do |t|
+    t.date "delivery_date"
+    t.integer "shipping_price"
+    t.integer "carrier_id", null: false
+    t.integer "quotation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrier_id"], name: "index_quotation_details_on_carrier_id"
+    t.index ["quotation_id"], name: "index_quotation_details_on_quotation_id"
+  end
+
   create_table "quotations", force: :cascade do |t|
     t.date "quotation_date"
-    t.date "delivery_date"
     t.integer "weight"
     t.integer "height"
     t.integer "width"
     t.integer "depth"
     t.integer "distance"
-    t.integer "shipping_price"
-    t.integer "carrier_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["carrier_id"], name: "index_quotations_on_carrier_id"
+    t.string "quotation_code"
   end
 
   create_table "service_orders", force: :cascade do |t|
@@ -154,7 +162,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_25_013934) do
 
   add_foreign_key "carrier_prices", "carriers"
   add_foreign_key "delivery_periods", "carriers"
-  add_foreign_key "quotations", "carriers"
+  add_foreign_key "quotation_details", "carriers"
+  add_foreign_key "quotation_details", "quotations"
   add_foreign_key "service_orders", "carriers"
   add_foreign_key "service_orders", "customers"
   add_foreign_key "service_orders", "products"

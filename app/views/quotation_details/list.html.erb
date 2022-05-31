@@ -1,0 +1,32 @@
+<h1>Quotação para o Orçamento - <%= @quotation.quotation_code %></h1>
+<% if @results.any? %>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Tranpostadora:</th>
+      <th>Preço (km):</th>
+      <th>Preço:</th>
+      <th>Prazo de Entrega:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @results.each do |result| %>
+    <tr>
+      <td><%= result['brand_name'] %></td>
+      <td><%= result['price'].to_i / 100.0 %></td>
+      <td><%= result['price'].to_i * @quotation.distance / 100.0 %></td>
+      <td><%= result['days'] %> dia(s)</td>
+    <% end %>
+    </tr>
+  </tbody>
+<% else %>
+  <p>Erro ao gerar Cotação</p>
+<% end %>
+</table>
+<hr>
+  
+
+<div>
+  <%= link_to 'Home', root_path  %> | <%= link_to 'Voltar', quotations_path %> |
+</div>

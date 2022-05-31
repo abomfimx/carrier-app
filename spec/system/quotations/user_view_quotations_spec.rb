@@ -19,23 +19,19 @@ describe 'Usuário visita a tela de Cadastro de Orçamentos' do
                               registration_number: '03680413000152', address: 'Av. Interlagos, 1000', city: 'Jaú',
                               state: 'SP')
   
-    Quotation.create!(quotation_date: '2022-05-21', delivery_date: '2022-05-22', weight: 5, height: 1, width:10, depth: 7, distance: 100, shipping_price: 250, carrier: carrier)
+    Quotation.create!(quotation_date: '2022-05-21', weight: 5, height: 1, width:10, depth: 7, distance: 100)
     # Act
     visit root_path
     within('nav') do
       click_on 'Orçamentos'
     end
     # Assert
-    expect(page).to have_content('2022-05-21')
-    expect(page).to have_content('2022-05-22')
+    expect(page).to have_content('21/05/2022')
     expect(page).to have_content('5')
     expect(page).to have_content('1')
     expect(page).to have_content('10')
     expect(page).to have_content('7')
     expect(page).to have_content('100')
-    expect(page).to have_content('250')
-    expect(page).to have_content('XPTO Trans')
- 
   end
 
   it 'não existem Orçamento cadastrados' do

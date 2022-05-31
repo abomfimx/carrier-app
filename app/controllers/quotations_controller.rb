@@ -1,11 +1,17 @@
 class QuotationsController < ApplicationController
   def index 
-    @quotations = Quotation.all
+    @quotations = Quotation.order(:quotation_date)
   end
 
   def new
     @quotation = Quotation.new
     @carriers = Carrier.all
+  end
+
+  def show
+    @quotation = Quotation.find(params[:id])
+    @quotation_details = QuotationDetail.where("quotation_id = ?", params[:id])
+    @count_detail = QuotationDetail.where("quotation_id = ?", params[:id]).count
   end
 
   def create
@@ -22,6 +28,6 @@ class QuotationsController < ApplicationController
   private
 
   def quotation_params
-    params.require(:quotation).permit(:quotation_date, :delivery_date, :weight, :height, :width, :depth,:distance,:shipping_price, :carrier_id)
+    params.require(:quotation).permit(:quotation_date, :weight, :height, :width, :depth,:distance, :quotation_code)
   end
 end

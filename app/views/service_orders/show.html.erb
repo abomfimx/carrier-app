@@ -30,11 +30,11 @@
 <hr>
 <div>
   <%= link_to 'Home', root_path %> | <%= link_to 'Voltar', service_orders_path %>|
-  <% if current_user.admin && @service_order.delivered? == false %>
+  <% if @service_order.approved? || current_user.admin %>
     <%= link_to 'Editar', edit_service_order_path(@service_order.id)  %>
   <% end %>
-  <% if @service_order.pending? %>
 
+  <% if @service_order.pending? %>
     <%= button_to 'Pedido Recusado', rejected_service_order_path(@service_order.id) %> |
     <%= button_to 'Pedido Aprovado', approved_service_order_path(@service_order.id) %>
   <% elsif  @service_order.approved? %>

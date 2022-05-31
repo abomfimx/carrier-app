@@ -6,10 +6,10 @@ class ServiceOrdersController < ApplicationController
   def index 
     set_references
     if current_user.admin
-      @serv_orders = ServiceOrder.all
+      @serv_orders = ServiceOrder.order(:placed_date)
     else
       # @serv_orders = current_user.carrier.service_orders - Rspec fails with it
-      @serv_orders = ServiceOrder.where("carrier_id = ?", current_user.carrier_id)
+      @serv_orders = ServiceOrder.where("carrier_id = ?", current_user.carrier_id).order(:placed_date)
     end
     @serv_orders
   end
